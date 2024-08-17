@@ -1,0 +1,147 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background-color: antiquewhite;
+}
+header{
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+#gamearea{
+	display: flex;
+	flex-direction: column;
+}
+#enemyarea{
+	height: 10rem;
+	display: flex;
+}
+#enemyfusionarea{
+	background-color: darkblue;
+	flex-grow: 1;
+}
+#enemyattackarea{
+	background-color: darkred;
+	flex-grow: 1;
+}
+#enemydefencearea{
+	background-color: darkgreen;
+	flex-grow: 1;
+}
+#playarea{
+	display: flex;
+}
+#areatitles{
+	display: flex;
+	background: white;
+}
+#areatitles div{
+	flex-grow: 1;
+	text-align: center;
+}
+.cardslot{
+	min-width: 6rem;
+	min-height: 9rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+#cardhand{
+	background-color: yellow;
+}
+#fusearea, #estimatedfusion{
+	background-color: blue;
+	flex-grow: 1;
+}
+#attackarea, #estimatedattack{
+	background-color: red;
+	flex-grow: 1;
+}
+#defencearea, #estimateddefence{
+	background-color: green;
+	flex-grow: 1;
+}
+.cardhand{
+	display: flex;
+	justify-content: center;
+}
+.card{
+	width: 5rem;
+	height: 8rem;
+	background-image: url(/img/backgroundcard.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: -1rem;
+	font-size: 1.2rem;
+	overflow: hidden;
+}
+.special{
+	color: orange;
+	border: 5px dashed orange;
+	border-radius: 15px;
+}
+#actionbar{
+	display: flex;
+}
+#playerinfo{
+	flex-grow: 1;
+}
+#buttons{
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#playerinfo, #enemyinfo{
+	background-color: black;
+	color: white;
+}
+.active{
+	padding: 0.5rem;
+	background-color: black;
+	color: white;
+	border: 1px dashed white;
+}
+.inactive{
+	padding: 0.5rem;
+	background-color: white;
+	color: grey;
+	border: 1px dashed black;
+
+}
+#blackpopup{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50%;
+	height: 50%;
+	background-color: black;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 1.5rem;
+}
+#blackpopup input, #blackpopup button{
+	padding: 0.5rem;
+}
+#createroom{
+	display: none;
+}
+#joinroom{
+	display: none;
+}
+#roomdisplay{
+	display: none;
+}
+#endgame{
+	display: none;
+}

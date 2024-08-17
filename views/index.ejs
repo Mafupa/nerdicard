@@ -1,0 +1,93 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>Nerdicard</title>
+	<link rel="stylesheet" href="/css/style.css">
+	<script src="/js/math.js" defer></script>
+	<script src="/js/client.js" defer></script>
+</head>
+<body>
+	<header>
+		<h1>[Nerdicard]</h1>
+	</header>
+	<div id="gamearea">
+		<div id="enemyinfo">
+			<div id="enemyname"></div>
+			<div id="enemyvalue"></div>
+		</div>
+		<div id="enemyarea">
+			<div id="enemyfusionarea"></div>
+			<div id="enemyattackarea"></div>
+			<div id="enemydefencearea"></div>
+		</div>
+		<div id="playarea">
+			<div id="fusearea" class="cardslot"></div>
+			<div id="attackarea" class="cardslot"></div>
+			<div id="defencearea" class="cardslot"></div>
+		</div>
+		<div id="areatitles">
+			<div class="blueback">Fusion</div>
+			<div class="redback">Attack</div>
+			<div class="greenback">Defence</div>
+		</div>
+		<div id="cardhand" class="cardslot">
+		</div>
+		<div id="actionbar">
+			<div id="playerinfo">
+				<div id="playername"></div>
+				<div id="playervalue"></div>
+				<div id="estimatedfusion"></div>
+				<div id="estimatedattack"></div>
+				<div id="estimateddefence"></div>
+
+			</div>
+			<div id="buttons">
+				<button id="finishturn" class="inactive" onclick="finishTurn()">Finish Turn</button>
+			</div>
+		</div>
+	</div>
+	<div id="blackpopup">
+		<div id="joinroom">
+			<label for="roominput">Room Id</label>
+			<br />
+			<input type="text" id="roominput">
+			<br />
+			<label for="nameinputjoin">Username</label>
+			<br />
+			<input type="text" id="nameinputjoin">
+			<br />
+			<br />
+			<button onclick="openStartMenu()">Back</button>
+			<button onclick="joinRoom()">Join</button>
+		</div>
+		<div id="createroom">
+			<label for="nameinputcreate">Username</label>
+			<br />
+			<input type="text" id="nameinputcreate">
+			<br />
+			<br />
+			<button onclick="openStartMenu()">Back</button>
+			<button onclick="createRoom()">Create</button>
+		</div>
+		<div id="roomdisplay">
+			<label for="roomIdDisplay">Room Id</label>
+			<br />
+			<input type="text" id="roomIdDisplay" value="69420" readonly>
+			<button onclick="copyText()">Copy</button>
+			<br />
+			<br />
+			<p>Waiting for opponent...</p>
+		</div>
+		<div id="startmenu">
+			<button onclick="openCreateRoomMenu()">Create Room</button>
+			<button onclick="openJoinRoomMenu()">Join Room</button>
+		</div>
+		<div id="endgame">
+			<p id="endtext"></p>
+			<br />
+			<button onclick="openStartMenu()">Home</button>
+			<button id="replayButton" class="inactive" onclick="replayGame()">Replay</button>
+		</div>
+	</div>
+</body>
+</html>

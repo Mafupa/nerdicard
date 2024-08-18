@@ -1,5 +1,5 @@
-//const ws = new WebSocket('ws://localhost:8080');
-const ws = new WebSocket('ws://nerdicard.onrender.com:8080');
+//const ws = new WebSocket('ws://localhost:3000');
+const ws = new WebSocket('wss://nerdicard.onrender.com');
 
 const playareas = document.querySelectorAll('.cardslot');
 const menuPopup = document.querySelector('#blackpopup');

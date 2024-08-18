@@ -1,3 +1,4 @@
+const https = require('https');
 const express = require("express");
 const ejs = require("ejs");
 const WebSocket = require('ws');
@@ -5,12 +6,12 @@ const WebSocket = require('ws');
 const {Room, Deck, Card, Player, evaluateCards} = require("./Game.js");
 
 const app = express();
+
 let port = process.env.PORT;
 if (port == null || port == "") {
 	port = 3000;
 }
 
-const wss = new WebSocket.Server({ port: 8080 });
 
 
 app.use(express.static('public'));
@@ -23,15 +24,13 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 
-
 app.get('/', (req, res)=>{
 	res.render('index.ejs');
 });
 
 
-app.listen(port, ()=>{
-	console.log("Listening on port "+ port);
-});
+const server = https.createServer(app);
+const wss = new WebSocket.Server({ server });
 
 
 const rooms = {};
@@ -202,3 +201,11 @@ wss.on('connection', (ws) => {
 		}
 	});
 });
+
+
+
+server.listen(port, ()=>{
+	console.log("Listening on port "+ port);
+});
+
+

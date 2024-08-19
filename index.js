@@ -1,4 +1,4 @@
-const https = require('https');
+const http = require('http');
 const express = require("express");
 const ejs = require("ejs");
 const WebSocket = require('ws');
@@ -29,7 +29,7 @@ app.get('/', (req, res)=>{
 });
 
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 

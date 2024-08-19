@@ -59,6 +59,8 @@ function decreasePlayerTime(roomId, intervalId) {
 			enemy.ws.send(JSON.stringify({ type: 'wonGame'}));
 			player.ready = false;
 			enemy.ready = false;
+		}else if (!player.ready || !enemy.ready){
+			clearInterval(intervalId);
 		}else{
 			rooms[roomId].players.forEach(p => {
 				p.ws.send(JSON.stringify({
@@ -68,9 +70,6 @@ function decreasePlayerTime(roomId, intervalId) {
 				}));
 			});
 		}
-	}
-	if (room.players.some(!p.ready)) {
-		clearInterval(intervalId);  // Stop the timer
 	}
 }
 

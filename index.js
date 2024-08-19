@@ -49,18 +49,27 @@ function generateRoomId() {
 function decreasePlayerTime(roomId, intervalId) {
 	const room = rooms[roomId];
 	const player = room.players.find(p => p.id === room.playerTurn);
+	const enemy = room.players.find(p => p.id !== room.playerTurn);
 
 	if (player.timeLeft > 0) {
 		player.timeLeft -= 1;
-		rooms[roomId].players.forEach(p => {
-			p.ws.send(JSON.stringify({
-				type: 'updateTime',
-				players: rooms[roomId].players,
-				turn: rooms[roomId].playerTurn
-			}));
-		})
+		if (player.timeLeft <= 0){
+			clearInterval(intervalId);
+			player.ws.send(JSON.stringify({ type: 'lostGame'}));
+			enemy.ws.send(JSON.stringify({ type: 'wonGame'}));
+			player.ready = false;
+			enemy.ready = false;
+		}else{
+			rooms[roomId].players.forEach(p => {
+				p.ws.send(JSON.stringify({
+					type: 'updateTime',
+					players: rooms[roomId].players,
+					turn: rooms[roomId].playerTurn
+				}));
+			});
+		}
 	}
-	if (room.players.some(p => p.timeLeft <= 0 || !p.ready)) {
+	if (room.players.some(!p.ready)) {
 		clearInterval(intervalId);  // Stop the timer
 	}
 }

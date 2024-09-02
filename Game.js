@@ -201,7 +201,7 @@ function evaluateCards(value, cards){
 			result = value;
 		}
 	}
-	if (result === undefined){
+	if (result === 'undefined'){
 		return 0;
 	}
 	return result;

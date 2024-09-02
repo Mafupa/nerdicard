@@ -34,7 +34,15 @@ Ensure that Node.js is installed, then run:
 npm install
 ```
 
-3. Run the project:
+3. Change client target
+To run the project locally change the first two lines of public/js/client.js to:
+```js
+const ws = new WebSocket('ws://localhost:3000');
+//const ws = new WebSocket('wss://nerdicard.onrender.com');
+```
+Don't forget to put it back before commiting!
+
+4. Run the project:
 
 Start the server with:
 
@@ -42,7 +50,7 @@ Start the server with:
 npm start
 ```
 
-4. Access the application:
+5. Access the application:
 
 Once the server is running, open your browser and go to:
 

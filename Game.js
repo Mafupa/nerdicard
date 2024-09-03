@@ -1,8 +1,50 @@
 const math = require('mathjs');
 
 
-const OPERATIONS = ['+5', '-5', '*2', '/2', '^2', '!', '*0', 'e', '+e', 'i', '+i'];
-const FUNCTIONS = ['sqrt(x)', 'ln(x)', 'log10(x)', 'Re(z)', 'Im(z)'];
+const OPERATIONS = [
+	'+5',
+	'-5',
+	'*2',
+	'/2',
+	'^2',
+	'!',
+	'*0',
+	'*-1',
+	'e',
+	'+e',
+	'+i'
+];
+
+const FUNCTIONS = [
+    'sqrt(x)', 
+    'ln(x)', 
+    'log10(x)', 
+    'Re(z)', 
+    'Im(z)', 
+    'abs(x)',
+    'exp(x)',
+    'sin(x)',
+    'cos(x)',
+    'tan(x)',
+    'asin(x)',
+    'acos(x)',
+    'atan(x)',
+    'sinh(x)',
+    'cosh(x)',
+    'tanh(x)',
+    'asinh(x)',
+    'acosh(x)',
+    'atanh(x)',
+    'log2(x)',
+    'cbrt(x)',
+    'sign(x)',
+    'ceil(x)',
+    'floor(x)',
+    'round(x)'
+];
+
+
+
 const ALLCARDS = OPERATIONS.concat(FUNCTIONS);
 
 
@@ -69,9 +111,12 @@ class Deck {
 	freshDeck(){
 		const newDeck = [];
 		for (let i = 0; i < 4; i++){
-			for (let j = 0; j < ALLCARDS.length; j++) {
-				newDeck.push(new Card(ALLCARDS[j]));
+			for (let j = 0; j < OPERATIONS.length; j++) {
+				newDeck.push(new Card(OPERATIONS[j]));
 			}
+		}
+		for (let i = 0; i < FUNCTIONS.length; i++) {
+			newDeck.push(new Card(FUNCTIONS[i]));
 		}
 		this.cards = newDeck;
 	}
@@ -167,20 +212,43 @@ class Player {
 
 
 function handleSpecial(value, special){
+	const functionMap = {
+		'sqrt(x)': (value) => math.sqrt(math.evaluate(value)),
+		'ln(x)': (value) => math.log(math.evaluate(value)),
+		'log10(x)': (value) => math.log10(math.evaluate(value)),
+		'Re(z)': (value) => math.re(math.evaluate(value)),
+		'Im(z)': (value) => math.im(math.evaluate(value)),
+		'abs(x)': (value) => math.abs(math.evaluate(value)),
+		'exp(x)': (value) => math.exp(math.evaluate(value)),
+		'sin(x)': (value) => math.sin(math.evaluate(value)),
+		'cos(x)': (value) => math.cos(math.evaluate(value)),
+		'tan(x)': (value) => math.tan(math.evaluate(value)),
+		'asin(x)': (value) => math.asin(math.evaluate(value)),
+		'acos(x)': (value) => math.acos(math.evaluate(value)),
+		'atan(x)': (value) => math.atan(math.evaluate(value)),
+		'sinh(x)': (value) => math.sinh(math.evaluate(value)),
+		'cosh(x)': (value) => math.cosh(math.evaluate(value)),
+		'tanh(x)': (value) => math.tanh(math.evaluate(value)),
+		'asinh(x)': (value) => math.asinh(math.evaluate(value)),
+		'acosh(x)': (value) => math.acosh(math.evaluate(value)),
+		'atanh(x)': (value) => math.atanh(math.evaluate(value)),
+		'log2(x)': (value) => math.log2(math.evaluate(value)),
+		'cbrt(x)': (value) => math.cbrt(math.evaluate(value)),
+		'sign(x)': (value) => math.sign(math.evaluate(value)),
+		'ceil(x)': (value) => math.ceil(math.evaluate(value)),
+		'floor(x)': (value) => math.floor(math.evaluate(value)),
+		'round(x)': (value) => math.round(math.evaluate(value))
+	};
 	try{
-		if(special === 'log10(x)'){
-			return math.log10(math.evaluate(value));
-		}else if(special === 'Re(z)'){
-			return math.re(math.evaluate(value));
-		}else if(special === 'ln(x)'){
-			return math.log(math.evaluate(value));
-		}else if(special === 'sqrt(x)'){
-			return math.sqrt(math.evaluate(value));
-		}else if(special === 'Im(z)'){
-			return math.im(math.evaluate(value));
-		}
+		const func = functionMap[special];
+        if (func) {
+            return func(value);
+        } else {
+            console.log('Unknown function: ' + special);
+            return value;
+        }
 	}catch(e){
-		console.log('Value:'+value);
+		console.log('Returning value:'+value);
 		return value;
 	}
 }
@@ -189,7 +257,7 @@ function handleSpecial(value, special){
 function evaluateCards(value, cards){
 	let result;
 	if(cards.length === 1 && FUNCTIONS.includes(cards[0])){
-		result = handleSpecial(value, cards[0]);
+		result = math.format(handleSpecial(value, cards[0]));
 	}else{
 		let expression = value;
 		cards.forEach(card => {

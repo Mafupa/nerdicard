@@ -11,6 +11,9 @@
 ## Overview
 Nerdicard is an online game built using Node.js. Players engage in a 1v1 strategic card battle, where they play cards based on operations and functions to outsmart their opponent.
 
+Check it at [Nerdicard](http://nerdicard.onrender.com). 
+Wait 50s for cold start ;)
+
 ## Features
 - Real-time multiplayer game using WebSockets.
 - Custom room creation for 1v1 games.
@@ -67,6 +70,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For any questions or feedback, you can reach out to me:
 
 GitHub: Mafupa
-
 Discord: mafupa
 
